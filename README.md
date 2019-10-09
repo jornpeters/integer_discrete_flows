@@ -6,7 +6,7 @@ This repository contains the code for the experiments presented in [1].
 
 ### CIFAR10 setup:
 ```
-python main_experiment.py --n_flows 8 --n_levels 3 --n_channels 512 --coupling_type 'densenet' --densenet_depth 16
+python main_experiment.py --n_flows 8 --n_levels 3 --n_channels 512 --coupling_type 'densenet' --densenet_depth 12
 ```
 
 
