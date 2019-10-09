@@ -16,9 +16,6 @@ from torchvision import transforms
 from torchvision.transforms import functional as vf
 from torch.utils.data import ConcatDataset
 
-
-# from torchvision.datasets import Dataset
-
 from PIL import Image
 
 import os

@@ -140,10 +140,6 @@ random.seed(args.manual_seed)
 torch.manual_seed(args.manual_seed)
 np.random.seed(args.manual_seed)
 
-# if args.cuda:
-#     # gpu device number
-#     torch.cuda.set_device(args.gpu_num)
-
 
 kwargs = {'num_workers': 4, 'pin_memory': True} if args.cuda else {}
 

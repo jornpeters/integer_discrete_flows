@@ -136,9 +136,6 @@ def compute_loss_array(pz, z, pys, ys, ldj, args):
 
             bpd_per_prior.append(convert_bpd(log_py.detach(), args.input_size))
 
-    # Add auxilary losses.
-    # loss = loss + loss_aux
-
     log_p += ldj
 
     loss = -log_p

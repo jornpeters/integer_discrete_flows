@@ -105,7 +105,6 @@ def encode_patches(imgs, model, decode):
             state_sizes += [8 * img_c * img_h * img_w + 1]
 
             # Error remains unchanged.
-
             print('Escaping, not encoding.')
 
         else:

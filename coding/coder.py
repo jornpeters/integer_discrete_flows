@@ -79,9 +79,6 @@ def encode_sample(
 
     state = rans.flatten(state)
 
-    # _, recon = decode_sample(state, pz)
-    # print('Errors:', torch.sum(torch.abs(z - recon)))
-
     return state
 
 
@@ -121,9 +118,6 @@ def statfun_decode(CDF):
     def _statfun_decode(cf):
         # Search such that CDF[s] <= cf < CDF[s]
         s = np.searchsorted(CDF, cf, side='right')
-        # for s in range(len(CDF)):
-        #     if CDF[s] > cf:
-        #         break
         s = s - 1
         start, freq = statfun_encode(CDF)(s)
         return s, (start, freq)
@@ -136,32 +130,3 @@ def encode(x, symbol):
 
 def decode(x):
     return rans.pop_symbol(statfun_decode, precision)(x)
-
-
-# x = rans.x_init
-# message = np.random.randint(-20, 20, size=10) + 128
-# print('message', message)
-
-# N = len(message)
-# # print(np.log2(f[126]) - np.log2(1 << precision))
-# for i in range(N):
-#     x = encode(x, message[i])
-
-# print(x)
-
-
-# # temp = x
-# # while temp > 0:
-# #     temp = temp >> 1
-# #     n_bits += 1
-
-# print(rans.flatten(x))
-# print(32 * len(rans.flatten(x)))
-# # print('Using {} bits'.format(rans.flan_bits))
-
-# decode_message = []
-# for i in range(N):
-#     x, s_i = decode(x)
-#     decode_message.append(s_i)
-
-# print(decode_message)

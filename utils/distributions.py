@@ -12,9 +12,6 @@ MAX_EPSILON = 1.-1e-5
 
 PI = math.pi
 
-# N(x | mu, var) = 1/sqrt{2pi var} exp[-1/(2 var) (x-mean)(x-mean)]
-# log N(x| mu, var) = -log sqrt(2pi) -0.5 log var - 0.5 (x-mean)(x-mean)/var
-
 
 def log_min_exp(a, b, epsilon=1e-8):
     """

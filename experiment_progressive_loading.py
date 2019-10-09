@@ -99,27 +99,6 @@ def run(args, kwargs):
             exp_dir + 'loaded{j}.png'.format(j=j),
             grid.cpu().numpy().transpose(1, 2, 0))
 
-    # if args.testing:
-    #     validation_loss, validation_bpd = evaluate(
-    #         train_loader, val_loader, final_model, final_model, args)
-
-    #     test_loss, test_bpd = evaluate(
-    #         train_loader, test_loader, final_model, final_model, args,
-    #         testing=True)
-
-    # else:
-    #     validation_loss, validation_bpd = evaluate(
-    #         train_loader, val_loader, final_model, final_model, args)
-
-    #     # save the test score in case you want to look it up later.
-    #     # _, _ = evaluate(test_loader, final_model, args, testing=True, file=test_score_file)
-
-    #     with open('experiment_log.txt', 'a') as ff:
-    #         print('FINAL EVALUATION ON VALIDATION SET\n'
-    #               'ELBO (VALIDATION): {:.4f}\n'.format(validation_loss), file=ff)
-    #         print('FINAL EVALUATION ON VALIDATION SET\n'
-    #               'ELBO (VAL) BPD : {:.4f}\n'.format(validation_bpd), file=ff)
-
 
 if __name__ == "__main__":
 

@@ -65,10 +65,9 @@ class Model(Base):
         if self.training:
             x = x + torch.rand_like(x)
         else:
-            # Stability for these unpractical continuous models ;).
+            # Required for stability.
             alpha = 1e-3
             x = x + alpha + torch.rand_like(x) * (1 - 2 * alpha)
-            # x = x + 0.5
 
         return x
 

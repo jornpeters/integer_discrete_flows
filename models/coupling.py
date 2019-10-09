@@ -114,16 +114,11 @@ def test_generative_flow():
     args = Args()
 
     x = (torch.randint(256, size=[batch_size] + input_size).float() - 128.) / 256.
-    # x = (torch.randint(256, size=[batch_size] + input_size).float() - 128.).round()
     ldj = torch.zeros_like(x[:, 0, 0, 0])
 
-    # TODO input args
     model = Coupling(c_in=12, height=16, width=16, args=args)
 
     print(model)
-
-    # model = model.cuda()
-    # x = x.cuda()
 
     model.set_temperature(1.)
     model.enable_hard_round()
@@ -131,8 +126,6 @@ def test_generative_flow():
     model.eval()
 
     z, ldj = model(x, ldj, reverse=False)
-
-    # print(z * 256.)
 
     # Check if gradient computation works
     loss = torch.sum(z**2)
@@ -146,6 +139,4 @@ def test_generative_flow():
 
 
 if __name__ == '__main__':
-    # test_invconv()
-
     test_generative_flow()

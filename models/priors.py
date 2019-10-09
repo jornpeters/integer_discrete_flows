@@ -107,16 +107,6 @@ class Prior(Base):
 class SplitPrior(Base):
     def __init__(self, c_in, factor_out, height, width, args):
         super().__init__()
-        # assert c_in % factor_out == 0
-        # stepsize = c_in // factor_out
-
-        # Pick
-        # split_idcs_np = np.arange(0, c_in, stepsize)
-        # cond_idcs_np = np.setdiff1d(range(c_in), split_idcs_np)
-
-        # self.split_idcs = torch.from_numpy(split_idcs_np)
-        # self.cond_idcs = torch.from_numpy(cond_idcs_np)
-        # self.channels = c_in
 
         self.split_idx = c_in - factor_out
         self.inverse_bin_width = 2**args.n_bits

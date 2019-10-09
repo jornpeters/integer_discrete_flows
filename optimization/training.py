@@ -3,7 +3,6 @@ import torch
 
 from optimization.loss import calculate_loss
 from utils.visual_evaluation import plot_reconstructions
-# from utils.log_likelihood import calculate_likelihood
 
 import numpy as np
 
@@ -12,7 +11,6 @@ def train(epoch, train_loader, model, opt, args):
     model.train()
     train_loss = np.zeros(len(train_loader))
     train_bpd = np.zeros(len(train_loader))
-    # regrets = np.zeros(len(train_loader))
 
     num_data = 0
 
@@ -28,8 +26,6 @@ def train(epoch, train_loader, model, opt, args):
         bpd = torch.mean(bpd)
         bpd_per_prior = [torch.mean(i) for i in bpd_per_prior]
 
-        # loss = loss / np.prod(args.input_size) / np.log(2)
-
         loss.backward()
         loss = loss.item()
         train_loss[batch_idx] = loss
@@ -38,9 +34,6 @@ def train(epoch, train_loader, model, opt, args):
         ldj = torch.mean(ldj).item() / np.prod(args.input_size) / np.log(2)
 
         opt.step()
-
-        # new_loss = torch.mean(model(data)[0]).item()
-        # regret = max(new_loss - loss, 0) / np.prod(args.input_size) / np.log(2)
 
         num_data += len(data)
 
@@ -69,13 +62,6 @@ def train(epoch, train_loader, model, opt, args):
     import os
     if not os.path.exists(args.snap_dir + 'training/'):
         os.makedirs(args.snap_dir + 'training/')
-
-    # if epoch < 10 or epoch % args.evaluate_interval_epochs == 0:
-    #     for data, _ in train_loader:
-    #         plot_images(
-    #             args, data.cpu().numpy()[:100], args.snap_dir + 'training/',
-    #             'images_{}'.format(epoch))
-    #         break
 
     print('====> Epoch: {:3d} Average train loss: {:.4f}, average bpd: {:.4f}'.format(
         epoch, train_loss.sum() / len(train_loader), train_bpd.sum() / len(train_loader)))
@@ -107,7 +93,6 @@ def evaluate(train_loader, val_loader, model, model_sample, args, testing=False,
 
                 bpds.append(batch_bpd)
 
-        # dims = np.prod(args.input_size)
         bpd = np.mean(bpds)
 
         with torch.no_grad():
@@ -151,10 +136,6 @@ def evaluate(train_loader, val_loader, model, model_sample, args, testing=False,
 
             log_likelihood = analyse(test_data)
 
-            # if args.dataset == 'caltech':
-            #     log_likelihood, nll_bpd = calculate_likelihood(test_data, model, args, S=2000, MB=1000)
-            # else:
-            #     log_likelihood, nll_bpd = calculate_likelihood(test_data, model, args, S=5000, MB=1000)
         else:
             log_likelihood = None
             nll_bpd = None
